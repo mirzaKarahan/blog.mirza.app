@@ -13,5 +13,10 @@ def generatedPostFile(fileName,content):
     with open(fileName, 'w') as f:
         f.write(content)
 
+def changedFilesGitPushCommandRun(message):
+    os.system('git add .')
+    os.system('git commit -m "'+message+'"')
+    os.system('git push')
 
 generatedPostFile(postFilesPath+'/test.mdx', 'test')
+changedFilesGitPushCommandRun('test postu eklendi')
