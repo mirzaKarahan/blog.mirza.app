@@ -1,4 +1,4 @@
-import os,uuid
+import os,datetime
 from dotenv import load_dotenv
 import openai
   
@@ -18,5 +18,5 @@ def changedFilesGitPushCommandRun(message):
     os.system('git commit -m "'+message+'"')
     os.system('git push')
 
-generatedPostFile(postFilesPath+'/test-'+str(uuid.uuid4())+'.mdx', 'test')
+generatedPostFile(postFilesPath+'/test-'+str(datetime.date.today())+'.mdx', 'test')
 changedFilesGitPushCommandRun('test postu eklendi')
