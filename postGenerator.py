@@ -1,4 +1,5 @@
 import os,uuid,re
+import time
 from topic import Topic
 from dotenv import load_dotenv
 import openai
@@ -29,16 +30,71 @@ def changedFilesGitPushCommandRun(message):
     os.system('git push')
 
 
-#postContent = generatedPostContentFromChatGTP("yazılım dünyasında en çok karşılaşılan hata ve çözümünü içeren sipesifik bir tane konu bulup bu konu hakkında blog yazmanı istiyorum.");
-postContent = generatedPostContentFromChatGTP(".Net Core ile bir REST API web servisinin nin nasıl yazılacağını anlatan bir blog yazmanı istiyorum.");
-print(postContent);
+#postContent = generatedPostContentFromChatGTP(".Net Core ile bir REST API web servisinin nin nasıl yazılacağını anlatan bir blog yazmanı istiyorum.");
 
-title = re.search(r"title:\s*(.*)", postContent)
-if title:
-    title = title.group(1)
-    title = slugify(title)
-    print(title)
-    generatedPostFile(postFilesPath+'/'+title+'.mdx', postContent)
-    changedFilesGitPushCommandRun('post eklendi')
-else:
-    print("Başlık bulunamadı.")
+yazilim_sorunlari = [
+    "Belirsiz proje gereksinimleri",
+    "Yetersiz dokümantasyon",
+    "Kötü kod kalitesi",
+    "Yetersiz test süreçleri",
+    "Proje süresinin yanlış tahmin edilmesi",
+    "Yetersiz iletişim",
+    "Teknolojik borç",
+    "Yeniden kullanılabilir kod eksikliği",
+    "Performans sorunları",
+    "Güvenlik açıkları",
+    "Yetersiz araç ve teknolojilerin seçimi",
+    "Tasarım ve kullanılabilirlik sorunları",
+    "Entegrasyon sorunları",
+    "Sürdürülebilirlik eksikliği",
+    "Eksik veya yanlış kullanıcı kabul testleri",
+    "Ekip üyeleri arasında yetenek dengesizliği",
+    "Yetersiz geri bildirim döngüleri",
+    "Müşteri beklentilerinin yanlış yönetilmesi",
+    "Kod tekrarı",
+    "Yetersiz hata yönetimi",
+    "Yetersiz sürüm kontrolü",
+    "Eksik veya yanlış veri yedekleme",
+    "Yetersiz kod yorumları",
+    "Kodun okunabilirliğinin düşük olması",
+    "Yetersiz kod incelemeleri",
+    "Yetersiz devops süreçleri",
+    "Eksik otomasyon",
+    "Yetersiz altyapı yönetimi",
+    "Eksik kapasite planlaması",
+    "Yetersiz eğitim ve öğrenme fırsatları",
+    "Yetersiz kullanıcı deneyimi (UX) tasarımı",
+    "Kötü veritabanı tasarımı",
+    "Yetersiz API dokümantasyonu",
+    "Eksik veya yanlış hata raporlama",
+    "Yetersiz güncelleme ve yükseltme süreçleri",
+    "Yetersiz kaynak yönetimi",
+    "Kötü mimari tasarım",
+    "Yetersiz ölçeklenebilirlik",
+    "Eksik veya yanlış kullanıcı eğitimi",
+    "Yetersiz proje yönetimi",
+    "Yetersiz bütçeleme",
+    "Yetersiz risk yönetimi",
+    "Yetersiz kalite güvencesi",
+    "Yetersiz kullanıcı desteği",
+    "Yetersiz geriye dönük uyumluluk",
+    "Yetersiz güvenlik testleri",
+    "Kötü kullanıcı arayüzü (UI) tasarımı",
+    "Yetersiz kullanıcı geri bildirimi",
+    "Yetersiz performans izleme",
+    "Yetersiz süreç iyileştirmeleri"
+]
+
+for item in yazilim_sorunlari:
+    postContent = generatedPostContentFromChatGTP("yazılım dünyasında "+item+" konusu hakkında blog yazmanı istiyorum.");
+    title = re.search(r"title:\s*(.*)", postContent)
+    if title:
+        title = title.group(1)
+        title = slugify(title)
+        print(title)
+        generatedPostFile(postFilesPath+'/'+title+'.mdx', postContent)
+        changedFilesGitPushCommandRun('post eklendi')
+    else:
+        print("Başlık bulunamadı.")
+    
+    time.sleep(5)
