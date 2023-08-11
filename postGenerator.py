@@ -9,7 +9,7 @@ postFilesPath = os.path.join(os.getcwd(), 'content/posts')
 openaiApiKey = os.getenv('OPEN_AI_API_KEY')
 openai.api_key = openaiApiKey
 
-def generatedPostContentFromChatGTP(subject):
+def generatedPostContentFromChatGTP():
     print(openaiApiKey);
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -21,19 +21,17 @@ def generatedPostContentFromChatGTP(subject):
     return response.choices[0].message['content']
 
 def generatedPostFile(fileName,content):
-    with open(fileName, 'w') as f:
+    with open(fileName, 'w', encoding="utf-8") as f:
         f.write(content)
+
 
 def changedFilesGitPushCommandRun(message):
     os.system('git add .')
     os.system('git commit -m "'+message+'"')
     os.system('git push')
 
-trends = Topic()
-topic = trends.getGoogleTrends();
 
-
-postContent = generatedPostContentFromChatGTP(topic['entityNames']);
+postContent = generatedPostContentFromChatGTP();
 
 generatedPostFile(postFilesPath+'/test-'+str(uuid.uuid4())+'.mdx', postContent)
-changedFilesGitPushCommandRun('test postu eklendi')
+#changedFilesGitPushCommandRun('test postu eklendi')
