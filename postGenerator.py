@@ -30,7 +30,7 @@ def changedFilesGitPushCommandRun(message):
 
 
 #postContent = generatedPostContentFromChatGTP("yazılım dünyasında en çok karşılaşılan hata ve çözümünü içeren sipesifik bir tane konu bulup bu konu hakkında blog yazmanı istiyorum.");
-postContent = generatedPostContentFromChatGTP("yapay zekanın gelişimi hakkında bilgi veren nerelerde nasıl kullanılacağını anlatan. Hangi mesleklere etki edeceğini anlatan bir blog yazmanı istiyorum.");
+postContent = generatedPostContentFromChatGTP("android mobil uygulama yazmak için gerekli olan bilgileri anlatan bir blog yazmanı istiyorum.");
 print(postContent);
 
 title = re.search(r"title:\s*(.*)", postContent)
