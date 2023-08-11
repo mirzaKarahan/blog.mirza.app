@@ -34,4 +34,4 @@ def changedFilesGitPushCommandRun(message):
 postContent = generatedPostContentFromChatGTP();
 
 generatedPostFile(postFilesPath+'/test-'+str(uuid.uuid4())+'.mdx', postContent)
-#changedFilesGitPushCommandRun('test postu eklendi')
+changedFilesGitPushCommandRun('post eklendi')
