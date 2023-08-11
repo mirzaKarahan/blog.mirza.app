@@ -2,7 +2,7 @@ import os,uuid,re
 from topic import Topic
 from dotenv import load_dotenv
 import openai
-  
+from slugify import slugify
 load_dotenv()
 
 postFilesPath = os.path.join(os.getcwd(), 'content/posts')
@@ -35,6 +35,7 @@ print(postContent);
 title = re.search(r"title:\s*(.*)", postContent)
 if title:
     title = title.group(1)
+    title = slugify(title)
     print(title)
     generatedPostFile(postFilesPath+'/'+title+'-'+str(uuid.uuid4())+'.mdx', postContent)
     changedFilesGitPushCommandRun('post eklendi')
