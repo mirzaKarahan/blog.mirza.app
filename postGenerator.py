@@ -1,4 +1,4 @@
-import os,uuid
+import os,uuid,re
 from topic import Topic
 from dotenv import load_dotenv
 import openai
@@ -14,8 +14,7 @@ def generatedPostContentFromChatGTP(subject):
         model="gpt-3.5-turbo",
          messages=[
              {"role": "user", "content": "Şimdi bana "+subject+" bu konu hakkında blog yazmanı istiyorum. Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum. Makalenin en başında alt alta [---\n title: {Makalenin başlığı} description: {açıklaması}.\n ---] yazmalı."}
-        #{"role": "user", "content": "Şimdi bana "+subject+" bu konu hakkında blog yazmanı istiyorum. Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum."}
-    ]
+             ]
     )
     return response.choices[0].message['content']
 
@@ -30,8 +29,14 @@ def changedFilesGitPushCommandRun(message):
     os.system('git push')
 
 
-postContent = generatedPostContentFromChatGTP("yazılım dünyasında en çok karşılaşılan hataları ve çözümlerini içeren sipesifik bir tane konu bulup");
+postContent = generatedPostContentFromChatGTP("yazılım dünyasında en çok karşılaşılan hata ve çözümünü içeren sipesifik bir tane konu bulup");
 print(postContent);
 
-generatedPostFile(postFilesPath+'/test-'+str(uuid.uuid4())+'.mdx', postContent)
-changedFilesGitPushCommandRun('post eklendi')
+title = re.search(r"title:\s*(.*)", postContent)
+if title:
+    title = title.group(1)
+    print(title)
+    generatedPostFile(postFilesPath+'/'+title+'-'+str(uuid.uuid4())+'.mdx', postContent)
+    changedFilesGitPushCommandRun('post eklendi')
+else:
+    print("Başlık bulunamadı.")
