@@ -13,7 +13,7 @@ def generatedPostContentFromChatGTP(subject):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
          messages=[
-             {"role": "user", "content": "Şimdi bana "+subject+" bu konu hakkında blog yazmanı istiyorum. Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum. Makalenin en başında alt alta [---\n title: {Makalenin başlığı} description: {açıklaması}.\n ---] yazmalı."}
+             {"role": "user", "content": "Şimdi bana "+subject+" Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum. Makalenin en başında alt alta [---\n title: {Makalenin başlığı} description: {açıklaması}.\n ---] yazmalı."}
              ]
     )
     return response.choices[0].message['content']
@@ -29,7 +29,8 @@ def changedFilesGitPushCommandRun(message):
     os.system('git push')
 
 
-postContent = generatedPostContentFromChatGTP("yazılım dünyasında en çok karşılaşılan hata ve çözümünü içeren sipesifik bir tane konu bulup");
+#postContent = generatedPostContentFromChatGTP("yazılım dünyasında en çok karşılaşılan hata ve çözümünü içeren sipesifik bir tane konu bulup bu konu hakkında blog yazmanı istiyorum.");
+postContent = generatedPostContentFromChatGTP("yapay zekanın gelişimi hakkında bilgi veren nerelerde nasıl kullanılacağını anlatan. Hangi mesleklere etki edeceğini anlatan bir blog yazmanı istiyorum.");
 print(postContent);
 
 title = re.search(r"title:\s*(.*)", postContent)
@@ -37,7 +38,7 @@ if title:
     title = title.group(1)
     title = slugify(title)
     print(title)
-    generatedPostFile(postFilesPath+'/'+title+'-'+str(uuid.uuid4())+'.mdx', postContent)
+    generatedPostFile(postFilesPath+'/'+title+'.mdx', postContent)
     changedFilesGitPushCommandRun('post eklendi')
 else:
     print("Başlık bulunamadı.")
