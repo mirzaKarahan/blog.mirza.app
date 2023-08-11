@@ -1,0 +1,135 @@
+---
+title: .Net Core ile REST API Web Servisi Nasıl Yazılır?
+description: Bu blog yazısında .Net Core kullanarak nasıl bir REST API web servisi yazılır detaylı bir şekilde anlatılacaktır.
+---
+
+# Giriş
+
+Bu blog yazısında .Net Core kullanarak nasıl bir REST API web servisi yazılır detaylı bir şekilde anlatılacaktır. .Net Core, hafif, çok platformlu ve açık kaynaklı bir framework olduğu için birçok geliştirici tarafından tercih edilmektedir. REST API ise günümüzde web servislerinin olmazsa olmazı haline gelmiştir. Bu blog yazısında, .Net Core'un sunduğu imkanları kullanarak nasıl bir REST API web servisi yazılır adımlar halinde detaylı bir şekilde açıklanacaktır.
+
+# Adım 1: Projeyi Oluşturma
+
+İlk adımda, .Net Core kullanarak yeni bir web projesi oluşturacağız. Bunun için aşağıdaki komutu terminalde çalıştırabilirsiniz:
+
+```bash
+dotnet new webapi -o MyWebAPI
+```
+
+Yukarıdaki komut, "MyWebAPI" adında bir web projesi oluşturacaktır.
+
+# Adım 2: Model ve Veritabanı Oluşturma
+
+REST API web servislerinde genellikle veritabanı kullanılır. Bu nedenle, ikinci adımda bir model sınıfı oluşturacak ve veritabanınızı hazırlayacaksınız. Örnek bir model sınıfı için aşağıdaki gibi bir "User" sınıfı oluşturabilirsiniz:
+
+```csharp
+public class User
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
+}
+```
+
+Bu sınıf, web servisimizin temel veritabanı tablosunu temsil edecektir.
+
+# Adım 3: Controller Oluşturma
+
+API tarafında istemcilerin yaptığı istekleri karşılayacak olan Controller'ı oluşturacağız. Bunun için aşağıdaki gibi bir "UserController" sınıfı oluşturabilirsiniz:
+
+```csharp
+[ApiController]
+[Route("api/[controller]")]
+public class UserController : ControllerBase
+{
+    [HttpGet]
+    public IActionResult Get()
+    {
+        // Kullanıcıları veritabanından al ve döndür
+        return Ok(users);
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult Get(int id)
+    {
+        // Belirli bir kullanıcıyı veritabanından al ve döndür
+        return Ok(user);
+    }
+
+    [HttpPost]
+    public IActionResult Post([FromBody] User user)
+    {
+        // Kullanıcıyı veritabanına kaydet
+        return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult Put(int id, [FromBody] User user)
+    {
+        // Belirli bir kullanıcıyı güncelle
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        // Belirli bir kullanıcıyı sil
+        return NoContent();
+    }
+}
+```
+
+Yukarıdaki sınıf, HTTP GET, POST, PUT ve DELETE isteklerini karşılamak için kullanılır. API kontrolcüsüne gelen istekler, ilgili metotlara yönlendirilir ve gerçekleştirilen işlemler sonucunda uygun HTTP durum kodları döndürülür.
+
+# Adım 4: Bağımlılıkları Yüklemek ve Projeyi Çalıştırmak
+
+Projenin çalışabilmesi için bazı bağımlılıkların yüklenmesi gerekmektedir. Bunun için aşağıdaki komutu terminalde çalıştırabilirsiniz:
+
+```bash
+dotnet restore
+```
+
+Daha sonra projeyi çalıştırmak için aşağıdaki komutu kullanabilirsiniz:
+
+```bash
+dotnet run
+```
+
+Bu komut sayesinde projeniz yerel sunucuda çalışmaya başlayacaktır.
+
+# Adım 5: API'i Test Etmek
+
+Projenizin başarıyla çalıştığını kontrol etmek için bir API test aracı kullanabilirsiniz. Örneğin, Postman gibi bir araç ile API'nin çalışıp çalışmadığını kontrol edebilirsiniz.
+
+- GET isteği: `http://localhost:5000/api/user`
+
+Tüm kullanıcıları listeleyen bir GET isteği yapabilirsiniz.
+
+- GET isteği: `http://localhost:5000/api/user/{id}`
+
+Belirli bir kullanıcıyı almak için yukarıdaki GET isteğini kullanabilirsiniz.
+
+- POST isteği: `http://localhost:5000/api/user`
+
+Yeni bir kullanıcı oluşturmak için bir POST isteği yapabilirsiniz.
+
+- PUT isteği: `http://localhost:5000/api/user/{id}`
+
+Belirli bir kullanıcıyı güncellemek için bir PUT isteği yapabilirsiniz.
+
+- DELETE isteği: `http://localhost:5000/api/user/{id}`
+
+Belirli bir kullanıcıyı silmek için bir DELETE isteği yapabilirsiniz.
+
+# Sonuç
+
+Bu blog yazısında, .Net Core kullanarak nasıl bir REST API web servisi yazılacağı detaylı bir şekilde anlatılmıştır. Adım adım ilerleyerek, projenin oluşturulması, model ve veritabanının hazırlanması, controller'ın oluşturulması, bağımlılıkların yüklenmesi ve projenin çalıştırılması gibi önemli konular ele alınmıştır. Umarım bu yazı size faydalı olmuştur ve .Net Core ile REST API web servisleri oluşturmanızı kolaylaştırmıştır.
+
+Kaynaklar:
+- [.Net Core web API dökümantasyonu](https://docs.microsoft.com/aspnet/core/tutorials/first-web-api?view=aspnetcore-5.0&tabs=visual-studio)
+- [.Net resmi dokümantasyonu](https://docs.microsoft.com/dotnet/)
+- [Postman](https://www.postman.com/)
+
+Notlar:
+- Yukarıdaki kod örnekleri basitlik amacıyla verilmiştir ve eksiklikler içerebilir. Gerçek projelerde daha kapsamlı kodlar kullanılması gerekmektedir.
+- Bu blog yazısı .Net Core 5.0 sürümü için geçerlidir ve daha eski sürümler için bazı farklılıklar olabilir.
