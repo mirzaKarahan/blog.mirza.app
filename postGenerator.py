@@ -9,11 +9,11 @@ postFilesPath = os.path.join(os.getcwd(), 'content/posts')
 openaiApiKey = os.getenv('OPEN_AI_API_KEY')
 openai.api_key = openaiApiKey
 
-def generatedPostContentFromChatGTP():
+def generatedPostContentFromChatGTP(subject):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
          messages=[
-             {"role": "user", "content": "Şimdi bana yazılım dünyasında en çok karşılaşılan hataları ve çözümlerini içeren bir konu bulup bu konu hakkında blog yazmanı istiyorum. Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum."}
+             {"role": "user", "content": "Şimdi bana "+subject+" bu konu hakkında blog yazmanı istiyorum. Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum. Makalenin en başında alt alta [---\n title: {Makalenin başlığı} description: {açıklaması}.\n ---] yazmalı."}
         #{"role": "user", "content": "Şimdi bana "+subject+" bu konu hakkında blog yazmanı istiyorum. Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum."}
     ]
     )
@@ -30,7 +30,8 @@ def changedFilesGitPushCommandRun(message):
     os.system('git push')
 
 
-postContent = generatedPostContentFromChatGTP();
+postContent = generatedPostContentFromChatGTP("yazılım dünyasında en çok karşılaşılan hataları ve çözümlerini içeren sipesifik bir tane konu bulup");
+print(postContent);
 
 generatedPostFile(postFilesPath+'/test-'+str(uuid.uuid4())+'.mdx', postContent)
 changedFilesGitPushCommandRun('post eklendi')
