@@ -1,13 +1,24 @@
-import os,datetime
+import os,uuid
+from topic import Topic
 from dotenv import load_dotenv
 import openai
   
 load_dotenv()
 
-openaiApiKey = os.getenv('OPEN_AI_API_KEY')
-openai.my_api_key = openaiApiKey
 postFilesPath = os.path.join(os.getcwd(), 'content/posts')
-print(postFilesPath)
+openaiApiKey = os.getenv('OPEN_AI_API_KEY')
+openai.api_key = openaiApiKey
+
+def generatedPostContentFromChatGTP(subject):
+    print(openaiApiKey);
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+         messages=[
+             {"role": "user", "content": "Şimdi bana yazılım dünyasında en çok karşılaşılan hataları ve çözümlerini içeren bir konu bulup bu konu hakkında blog yazmanı istiyorum. Bu blog makalesini yazarken bana sadece JSON formatında 'title' ile makalenin başlığı ve 'content' ile makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum."}
+        #{"role": "user", "content": "Şimdi bana "+subject+" bu konu hakkında blog yazmanı istiyorum. Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum."}
+    ]
+    )
+    return response.choices[0].message['content']
 
 def generatedPostFile(fileName,content):
     with open(fileName, 'w') as f:
@@ -18,5 +29,11 @@ def changedFilesGitPushCommandRun(message):
     os.system('git commit -m "'+message+'"')
     os.system('git push')
 
-generatedPostFile(postFilesPath+'/test-'+str(datetime.date.today())+'.mdx', 'test')
+trends = Topic()
+topic = trends.getGoogleTrends();
+
+
+postContent = generatedPostContentFromChatGTP(topic['entityNames']);
+
+generatedPostFile(postFilesPath+'/test-'+str(uuid.uuid4())+'.mdx', postContent)
 changedFilesGitPushCommandRun('test postu eklendi')
