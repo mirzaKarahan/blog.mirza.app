@@ -33,56 +33,16 @@ def changedFilesGitPushCommandRun(message):
 #postContent = generatedPostContentFromChatGTP(".Net Core ile bir REST API web servisinin nin nasıl yazılacağını anlatan bir blog yazmanı istiyorum.");
 
 yazilim_sorunlari = [
-    "Belirsiz proje gereksinimleri",
-    "Yetersiz dokümantasyon",
-    "Kötü kod kalitesi",
-    "Yetersiz test süreçleri",
-    "Proje süresinin yanlış tahmin edilmesi",
-    "Yetersiz iletişim",
-    "Teknolojik borç",
-    "Yeniden kullanılabilir kod eksikliği",
-    "Performans sorunları",
-    "Güvenlik açıkları",
-    "Yetersiz araç ve teknolojilerin seçimi",
-    "Tasarım ve kullanılabilirlik sorunları",
-    "Entegrasyon sorunları",
-    "Sürdürülebilirlik eksikliği",
-    "Eksik veya yanlış kullanıcı kabul testleri",
-    "Ekip üyeleri arasında yetenek dengesizliği",
-    "Yetersiz geri bildirim döngüleri",
-    "Müşteri beklentilerinin yanlış yönetilmesi",
-    "Kod tekrarı",
-    "Yetersiz hata yönetimi",
-    "Yetersiz sürüm kontrolü",
-    "Eksik veya yanlış veri yedekleme",
-    "Yetersiz kod yorumları",
-    "Kodun okunabilirliğinin düşük olması",
-    "Yetersiz kod incelemeleri",
-    "Yetersiz devops süreçleri",
-    "Eksik otomasyon",
-    "Yetersiz altyapı yönetimi",
-    "Eksik kapasite planlaması",
-    "Yetersiz eğitim ve öğrenme fırsatları",
-    "Yetersiz kullanıcı deneyimi (UX) tasarımı",
-    "Kötü veritabanı tasarımı",
-    "Yetersiz API dokümantasyonu",
-    "Eksik veya yanlış hata raporlama",
-    "Yetersiz güncelleme ve yükseltme süreçleri",
-    "Yetersiz kaynak yönetimi",
-    "Kötü mimari tasarım",
-    "Yetersiz ölçeklenebilirlik",
-    "Eksik veya yanlış kullanıcı eğitimi",
-    "Yetersiz proje yönetimi",
-    "Yetersiz bütçeleme",
-    "Yetersiz risk yönetimi",
-    "Yetersiz kalite güvencesi",
-    "Yetersiz kullanıcı desteği",
-    "Yetersiz geriye dönük uyumluluk",
-    "Yetersiz güvenlik testleri",
-    "Kötü kullanıcı arayüzü (UI) tasarımı",
-    "Yetersiz kullanıcı geri bildirimi",
-    "Yetersiz performans izleme",
-    "Yetersiz süreç iyileştirmeleri"
+    "Java'nın Android ve iş uygulamaları geliştirmede yaygın kullanımı.",
+    "C dilinin 1970'lerin başında tasarlanmış olması ve eski olması.",
+    "Python'un kodunun kolay okunabilir olması ve başlangıç için önerilmesi.",
+    "Web'in üçte birinde PHP kullanılmasına rağmen birçok programcının PHP'den hoşlanmaması.",
+    "Visual Basic'in eski moda olmasına rağmen hala hayranlarının olması.",
+    "JavaScript'in modern web için yaygın kullanılmasına rağmen yavaş olması ve güvenlik açıklarının bulunması.",
+    "R dilinin veri analizi ve istatistikçiler için popüler olması.",
+    "Go dilinin Google tarafından büyük veri için tasarlanmış olması ve hızla popülerleşmesi.",
+    "Ruby'nin kolay kodlama yapısı ve Rails add-on'u ile popüler olması.",
+    "Groovy'nin Java türevi olması ve kodlama işini hızlandırması."
 ]
 
 for item in yazilim_sorunlari:
@@ -93,8 +53,8 @@ for item in yazilim_sorunlari:
         title = slugify(title)
         print(title)
         generatedPostFile(postFilesPath+'/'+title+'.mdx', postContent)
-        changedFilesGitPushCommandRun('post eklendi')
     else:
         print("Başlık bulunamadı.")
     
     time.sleep(5)
+changedFilesGitPushCommandRun('post eklendi')
