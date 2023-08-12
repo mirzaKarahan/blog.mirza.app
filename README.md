@@ -1,7 +1,7 @@
 # Automatic Blog Generator
 
 This repo was created to demonstrate how quickly you can publish blog posts on a blog application using Chat GPT. The application was completed in approximately 1 hour.
-
+[Demo](https://blog.mirza.app/)
 ## Key Information
 
 - The blog application is written with Node.js and Next.js.
