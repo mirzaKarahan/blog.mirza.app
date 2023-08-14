@@ -8,7 +8,6 @@ import { Analytics } from "@/components/analytics"
 import { ModeToggle } from "@/components/mode-toggle"
 import Modal from 'react-modal'
 import { useState } from "react";
-import Script from 'next/script'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -56,20 +55,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </header>
             <main>{children}</main>
           </div>
-          <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} 
-        style={customStyles}
-        contentLabel="Example Modal">
-           <h2 >Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
-        </Modal>
           <Analytics />
         </ThemeProvider>
       </body>
