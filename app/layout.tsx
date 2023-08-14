@@ -1,9 +1,14 @@
+'use client';
+
 import Link from "next/link"
 import "./globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@/components/analytics"
 import { ModeToggle } from "@/components/mode-toggle"
+import Modal from 'react-modal'
+import { useState } from "react";
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -15,10 +20,32 @@ export const metadata = {
 interface RootLayoutProps {
   children: React.ReactNode
 }
-
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 export default function RootLayout({ children }: RootLayoutProps) {
+  
+  const [isOpen, setIsOpen] = useState(false)
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
     <html lang="en">
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-QN56HDYTF1"/>
+<Script id="google-analytics">
+{`window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QN56HDYTF1');`}
+</Script>
       <body
         className={`antialiased min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 ${inter.className}`}
       >
@@ -30,12 +57,27 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <nav className="ml-auto text-sm font-medium space-x-6">
                   <Link href="/">Blog</Link>
                   <Link href="/about">Hakkında</Link>
+                  
                   <Link href="https://github.com/mirzaKarahan">GitHub</Link>
                 </nav>
               </div>
             </header>
             <main>{children}</main>
           </div>
+          <Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)} 
+        style={customStyles}
+        contentLabel="Example Modal">
+           <h2 >Hello</h2>
+        <button onClick={closeModal}>close</button>
+        <div>I am a modal</div>
+        <form>
+          <input />
+          <button>tab navigation</button>
+          <button>stays</button>
+          <button>inside</button>
+          <button>the modal</button>
+        </form>
+        </Modal>
           <Analytics />
         </ThemeProvider>
       </body>

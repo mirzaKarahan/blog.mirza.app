@@ -1,0 +1,152 @@
+---
+title: PHP ile REST API Web Servisinin Nasıl Yazılır?
+description: Bu makalede PHP kullanarak bir REST API web servisinin nasıl yazılacağını detaylı bir şekilde anlatacağım.
+---
+
+# Giriş
+
+Bu makalede, PHP programlama dili kullanarak bir REST API web servisinin nasıl yazılacağını detaylı bir şekilde ele alacağım. REST (Representational State Transfer), modern web uygulamalarının yaygın olarak tercih ettiği bir mimari stilidir. Bu makalede temel HTTP metotlarına (GET, POST, PUT, DELETE) dayalı bir API yazacağız ve istemcilerin bu API ile veri iletişimi yapabilmesini sağlayacağız. 
+
+# Gerekli Araçlar ve Teknolojiler
+
+REST API web servisini yazmak için aşağıdaki teknolojileri ve araçları kullanacağız:
+
+- PHP: Web sunucusunda çalıştırılacak olan api kodunu PHP dili ile yazacağız.
+- Composer: PHP paketlerini yönetmek için Composer kullanacağız.
+- Slim Framework: REST API'nin temel işlevselliğini sağlamak için Slim Framework'ü kullanacağız. Slim Framework, hafif ve kullanımı kolay bir PHP mikro framework'üdür.
+- JSON: Veri alışverişi için JSON formatını kullanacağız.
+
+# Adımlar
+
+## Adım 1: Slim Framework Kurulumu
+
+İlk adımda, Slim Framework'ü projemize dahil etmek için Composer kullanacağız. Composer, paket bağımlılıklarını yönetmemize yardımcı olan bir paket yöneticisidir. Aşağıdaki komutu terminalde çalıştırarak Composer'ı projenize ekleyin:
+
+```
+composer require slim/slim:"4.*"
+```
+
+## Adım 2: Ana Dosya Yapısının Oluşturulması
+
+Proje dosyalarını düzenli bir şekilde tutmak için aşağıdaki dosya yapısını oluşturun:
+
+```
+- api
+  - v1
+    - controllers
+      - UserController.php
+    - models
+      - User.php
+    - routes
+      - user.php
+  - vendor
+  - index.php
+```
+
+## Adım 3: Temel API İşlevselliğini Oluşturma
+
+### Adım 3.1: index.php Dosyası
+
+Ana dizinde bulunan index.php dosyasını açın ve aşağıdaki kodu ekleyin:
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$app = \Slim\Factory\AppFactory::create();
+
+require 'api/v1/routes/user.php';
+
+$app->run();
+```
+
+Bu kodda, Slim Framework'ü dahil ediyoruz ve kullanacağımız API rotalarını belirlediğimiz `user.php` dosyasını dahil ediyoruz. Daha sonra uygulamayı çalıştırıyoruz.
+
+### Adım 3.2: user.php Dosyası
+
+`api/v1/routes/user.php` dosyasını oluşturun ve aşağıdaki kodu ekleyin:
+
+```php
+<?php
+
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+
+$app->get('/users', function (Request $request, Response $response, $args) {
+    // Tüm kullanıcıları getir ve JSON olarak dön
+});
+
+$app->post('/users', function (Request $request, Response $response, $args) {
+    // Yeni kullanıcı oluştur ve JSON olarak kaydın durumunu dön
+});
+
+$app->put('/users/{id}', function (Request $request, Response $response, $args) {
+    // Belirli bir kullanıcıyı güncelle ve JSON olarak kaydın durumunu dön
+});
+
+$app->delete('/users/{id}', function (Request $request, Response $response, $args) {
+    // Belirli bir kullanıcıyı sil ve JSON olarak silme durumunu dön
+});
+```
+
+Bu kodda, HTTP metodlarını kullanarak kullanıcı işlemlerini gerçekleştiren dört farklı rota tanımlanmıştır. Her rotada, ilgili işlemleri gerçekleştiren kodları yazmanız gerekmektedir.
+
+### Adım 3.3: UserController ve User Modeli
+
+`api/v1/controllers/UserController.php` dosyasını oluşturun ve aşağıdaki kodu ekleyin:
+
+```php
+<?php
+
+namespace App\Controllers;
+
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Models\User;
+
+class UserController {
+
+    public function getAllUsers(Request $request, Response $response, $args) {
+        // Tüm kullanıcıları getir ve JSON olarak dön
+    }
+
+    public function createUser(Request $request, Response $response, $args) {
+        // Yeni kullanıcı oluştur ve JSON olarak kaydın durumunu dön
+    }
+
+    public function updateUser(Request $request, Response $response, $args) {
+        // Belirli bir kullanıcıyı güncelle ve JSON olarak kaydın durumunu dön
+    }
+
+    public function deleteUser(Request $request, Response $response, $args) {
+        // Belirli bir kullanıcıyı sil ve JSON olarak silme durumunu dön
+    }
+}
+```
+
+`api/v1/models/User.php` dosyasını oluşturun ve aşağıdaki kodu ekleyin:
+
+```php
+<?php
+
+namespace App\Models;
+
+class User {
+    public $id;
+    public $name;
+    public $email;
+
+    // Gerekli getter ve setter metotlarını yaz
+}
+```
+
+Bu kodda, UserController sınıfı API rotalarında kullanılan işlevleri barındırırken, User sınıfı kullanıcı verilerini temsil eden bir modeldir.
+
+## Adım 4: API'yi Test Etme
+
+REST API projenizi başarıyla tamamladığınızda, API'yi test etmek için Postman veya cURL gibi bir HTTP istemcisi kullanabilirsiniz. Örneğin, `/users` rotasına bir GET isteği atarak tüm kullanıcıları alabilir veya POST isteği atarak yeni bir kullanıcı oluşturabilirsiniz.
+
+# Sonuç
+
+Bu makalede, PHP kullanarak bir REST API web servisi nasıl oluşturulacağını anlattım. Slim Framework'ü kullanarak basit bir API yazdık ve kullanıcı işlemlerini GET, POST, PUT ve DELETE metotlarıyla gerçekleştirdik. API'yi projenizin ihtiyaçlarına göre genişletebilir ve geliştirebilirsiniz.

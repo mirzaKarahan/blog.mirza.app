@@ -1,0 +1,79 @@
+---
+title: Node.js ile REST API Web Servisi Nasıl Yazılır
+description: Bu makalede Node.js kullanarak nasıl bir REST API web servisi oluşturabileceğinizi detaylı bir şekilde anlatacağız.
+---
+
+## Giriş
+
+Bu makalede, Node.js kullanarak nasıl bir REST API web servisi oluşturabileceğinizi detaylı bir şekilde anlatacağız. REST API, web uygulamalarının farklı sistemlerle iletişim kurmasını sağlayan bir yöntemdir. Node.js, JavaScript tabanlı bir platform olduğu için REST API'nin yazılması için ideal bir araçtır.
+
+## Adım 1: Geliştirme Ortamının Kurulumu
+
+Node.js'i kullanarak REST API geliştirmeye başlamadan önce, gerekli olan geliştirme ortamını kurmanız gerekmektedir. İlk adımda, Node.js'in en son sürümünü [nodejs.org](https://nodejs.org) adresinden indirip kurulumunu gerçekleştirin. Kurulum tamamlandıktan sonra, bir metin düzenleyicisi seçerek veya tercih ettiğiniz bir IDE (Integrated Development Environment) kullanabilirsiniz.
+
+## Adım 2: Yeni Bir Proje Oluşturma
+
+REST API projenizi yönetmek için Node.js paket yöneticisi olan npm'i kullanacağız. Yeni bir klasör oluşturun ve terminali açarak bu klasöre gidin. Ardından aşağıdaki komutu kullanarak yeni bir npm projesi oluşturun:
+
+```
+$ npm init
+```
+
+Bu komutu çalıştırdığınızda, bir dizi soruyla karşılaşacaksınız. Bu sorulara cevap vererek bir `package.json` dosyasınız oluşturacaktır. Bu dosya, projenizin bağımlılıklarını ve diğer ayarlarını içerecektir.
+
+## Adım 3: Express Framework'ünün Kurulumu
+
+Express, Node.js tabanlı web uygulamaları ve REST API'ları oluşturmak için popüler bir framework'tür. Projemizde Express'i kullanmak için aşağıdaki komutu kullanarak bu framework'ü paketimize ekleyin:
+
+```
+$ npm install express
+```
+
+Express framework'ünü başarılı bir şekilde yükledikten sonra, projenizin `package.json` dosyasında bu bağımlılığı göreceksiniz. Ayrıca, projenizin ana dizininde bir `node_modules` klasörü oluşacaktır.
+
+## Adım 4: Temel Bir REST API Rotaları Oluşturma
+
+Yeni bir dosya oluşturun ve bu dosyaya `index.js` adını verin. Ardından aşağıdaki kod parçasını bu dosyanın içine yapıştırın:
+
+```javascript
+const express = require('express');
+const app = express();
+const port = 3000;
+
+// Ana rotaya GET isteği gönderildiğinde "Hello World!" mesajını döndürür
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+// Rota parametreleri kullanarak dinamik bir endpoint oluşturma
+app.get('/users/:id', (req, res) => {
+  const userId = req.params.id;
+  res.send(`User ID: ${userId}`);
+});
+
+// Diğer HTTP metotlarına farklı rotalar eklenebilir
+app.post('/users', (req, res) => {
+  res.send('User created successfully');
+});
+
+// Server'ı dinlemeye başlar
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});
+```
+
+Bu kod bize basit bir REST API sunacak. İlk rotaya `GET /` isteği gönderildiğinde "Hello World!" mesajını dönecektir. İkinci rotaya `GET /users/:id` isteği gönderildiğinde bir kullanıcı ID'si dönecektir. Üçüncü rotaya `POST /users` isteği gönderildiğinde bir kullanıcı yaratma işlemi gerçekleştirilecektir.
+
+## Adım 5: Server'ı Çalıştırma
+
+Son adımda, projenizi çalıştırabilirsiniz. Terminalde aşağıdaki komutu kullanarak Express uygulamanızı başlatın:
+
+```
+$ node index.js
+```
+
+Express uygulamanız başlatıldıktan sonra, http://localhost:3000 adresine giderek API'nizin çalıştığını görebilirsiniz. Ana rotaya (`GET /`) giderek "Hello World!" mesajını veya `GET /users/1` gibi bir kullanıcı ID'si alarak endpoint'in çalıştığını kontrol edebilirsiniz.
+
+## Sonuç
+
+Bu makalede, Node.js kullanarak nasıl bir REST API web servisi oluşturabileceğinizi öğrendiniz. İlk olarak, geliştirme ortamınızı kurup bir projeyi oluşturdunuz ve daha sonra Express framework'ünü projenize ekleyerek temel API rotalarını oluşturdunuz. Son olarak, projenizi çalıştırarak API'nizin çalıştığını doğruladınız. Node.js'in sağladığı kolay kullanım ve Express framework'ünün güçlü özellikleri sayesinde REST API oluşturma süreci oldukça hızlı ve basit hale gelir.

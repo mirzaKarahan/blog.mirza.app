@@ -1,9 +1,15 @@
 import json
 import requests
 from bs4 import BeautifulSoup
+from rss_parser import Parser
 
 class Topic:
-    
+
+    def getRSSTrends(self):    
+        response = requests.get("https://trends.google.com/trends/trendingsearches/daily/rss?geo=TR")
+        rss = Parser.parse(response.text)
+        return rss.channel.items;
+
     def getGoogleTrends(self):
         topicIdsListUrl = "https://trends.google.com/trends/api/realtimetrends?hl=tr&tz=-180&cat=all&fi=0&fs=0&geo=TR&ri=300&rs=20&sort=0"
         topicIdsList = requests.get(topicIdsListUrl)
@@ -32,3 +38,6 @@ class Topic:
             })
         
         return trends
+    
+t = Topic();
+t.getRSSTrends();

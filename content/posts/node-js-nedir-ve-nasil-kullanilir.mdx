@@ -1,0 +1,37 @@
+---
+title: Node JS Nedir ve Nasıl Kullanılır?
+description: Node JS, sunucu tarafında çalışan bir JavaScript runtime ortamıdır. Bu blog yazısında, Node JS'in ne olduğunu, ne işe yaradığını ve nasıl kullanıldığını detaylı bir şekilde öğreneceksiniz.
+
+---
+
+Node.js, sunucu tarafında çalışan bir JavaScript runtime ortamıdır. Sunucu tarafında çalışmasıyla, JavaScript'in tarayıcılarla sınırlı kalmayarak, sunucu tarafında da kullanılmasına olanak sağlar. Bu sayede yüksek performanslı ve ölçeklenebilir ağ uygulamaları geliştirmek mümkün hale gelir. 
+
+Node.js'in popülerleşmesinin en önemli sebeplerinden biri, hızlı ve verimli bir şekilde sunucu tarafında çalışabilme yeteneğidir. İstemcinin sunucuya olan taleplerini hızlı bir şekilde işler, asenkron bir yapıya sahip olduğu için performansı arttırır. Aynı zamanda, geliştiricilerin JavaScript bilgisini kullanarak, sunucu taraflı uygulamalar geliştirebilmesini sağlar.
+
+Node.js'in sunduğu avantajlardan biri de, paket yöneticisi olan npm (Node Package Manager) ile yüz binlerce kullanılabilir modülü içeren bir ekosisteme sahip olmasıdır. Bu modüller, geliştiricilere işlerini kolaylaştıran işlevler sunar ve tekrar tekrar kullanılabilir kod parçalarının oluşturulmasını sağlar.
+
+Node.js'i kullanarak neler yapabilirsiniz?
+
+1. Web Sunucusu Oluşturmak: Node.js, HTTP modülü ile HTTP sunucularını çalıştırmanızı sağlar. Bu sayede web sunucusu oluşturabilir, talepleri işleyebilir ve yanıtlar alabilirsiniz.
+
+2. Gerçek Zamanlı Uygulamalar: WebSocket protokolünü destekleyerek gerçek zamanlı iletişim sağlayabilirsiniz. Bu özellikle sohbet uygulamaları, oyunlar veya canlı bildirimler gibi alanlarda kullanılabilir.
+
+3. Mobil Uygulama Sunucusu: Node.js, mobil uygulamalarınız için bir API sunucusu olarak çalışabilir. Böylece, istemcilerden gelen talepleri işleyebilir ve veritabanı gibi kaynaklara erişerek istemcilerle iletişim kurabilirsiniz.
+
+4. Arka Uç İşlemler: Veritabanı işlemleri, dosya sistemine erişim, ağ çağrıları gibi arka uç işlemler için Node.js'i kullanabilirsiniz. İstemciden gelen taleplere bağlı olarak veritabanına erişmek veya dosya işlemleri yapmak gibi işlemleri gerçekleştirebilirsiniz.
+
+Nasıl kullanılır?
+
+1. Node.js Kurulumu: Node.js'i kullanmaya başlamadan önce bilgisayarınıza Node.js'in en son sürümünü indirmeniz ve kurmanız gerekmektedir. Node.js'in resmi websitesinden indirme işlemini gerçekleştirebilirsiniz.
+
+2. Çalışma Ortamının Hazırlanması: Bir projede Node.js kullanmak için klasörünüzü oluşturmanız ve içerisinde bir `package.json` dosyası oluşturmanız gerekmektedir. Bunun için terminali açarak, projenizin olduğu klasöre gidip `npm init` komutunu çalıştırabilirsiniz. Bu komut, projeniz için gerekli olan paketleri ve ayarları içeren `package.json` dosyasını oluşturur.
+
+3. İhtiyaç Duyulan Paketlerin Yüklenmesi: `package.json` dosyası ile projenizin bağımlılıklarını kontrol edebilirsiniz. İhtiyaç duyduğunuz paketleri `npm install` komutu ile yükleyebilirsiniz.
+
+4. Bir Express Uygulaması Oluşturma: Express, popüler olarak kullanılan bir Node.js web uygulama çerçevesidir. Express'i kullanarak bir HTTP sunucusu oluşturabilirsiniz. İlk olarak `express` paketini yüklemek için `npm install express` komutunu kullanabilirsiniz. Daha sonra, bir `app.js` dosyası oluşturarak Express'i kullanarak uygulamanızı yapılandırabilirsiniz.
+
+5. Uygulamanın Çalıştırılması: Express uygulamasını çalıştırmak için `node app.js` komutunu kullanabilirsiniz. Ardından, belirlediğiniz port numarasına uygun olarak tarayıcınızda `http://localhost:{port}` adresini açarak uygulamanıza erişebilirsiniz.
+
+Bu yazıda, Node.js'in ne olduğunu, ne işe yaradığını ve nasıl kullanıldığını detaylı bir şekilde anlattık. Node.js, geliştiricilere JavaScript kullanarak yüksek performanslı, ölçeklenebilir ve verimli sunucu taraflı uygulamalar geliştirebilme imkanı sunar. Paket yöneticisi olan npm ile birçok modülü kullanarak işlerinizi kolaylaştırabilirsiniz. Node.js'i kullanarak web sunucusu, gerçek zamanlı uygulamalar, mobil uygulama sunucusu veya çeşitli arka uç işlemlerini gerçekleştirebilirsiniz.
+
+Bu makalede, Node.js'in temellerini öğrendiniz ve başlangıç seviyesinde kullanımınıza ilişkin ipuçları buldunuz. Daha fazla Node.js özelliğini keşfetmek ve projelerinizi geliştirmek için resmi Node.js dokümantasyonunu incelemenizi öneririm. Node.js, ilgi çekici bir teknoloji olduğu gibi, sürekli olarak gelişmekte olan bir ekosisteme sahip olduğundan, güncel gelişmeleri takip etmekte fayda vardır.

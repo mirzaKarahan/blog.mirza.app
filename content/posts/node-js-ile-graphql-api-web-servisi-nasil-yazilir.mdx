@@ -1,0 +1,140 @@
+---
+title: Node JS ile GraphQL API Web Servisi Nasıl Yazılır?
+description: Bu makalede, Node JS kullanarak GraphQL API web servisi nasıl oluşturulur detaylı bir şekilde açıklanmaktadır.
+---
+
+Merhaba! Bu makalede, Node JS kullanarak bir GraphQL API web servisi nasıl yazılacağını detaylı bir şekilde öğreneceksiniz.
+
+## İçindekiler
+
+- Giriş
+- Gereksinimler
+- Proje Yapısının Oluşturulması
+- GraphQL Kurulumu ve Ayarlanması
+- Şema Oluşturma
+- Sorguları ve Mutasyonları Oluşturma
+- Sunucunun Başlatılması
+- Sonuç
+
+## Giriş
+
+GraphQL, Facebook tarafından geliştirilen bir sorgulama dilidir ve verilere istemci tarafından tam kontrol sağlama amacını taşır. Bu makalede, GraphQL'i kullanarak bir API web servisi oluşturma sürecini adım adım açıklayacağız. Node JS platformunu tercih edeceğiz, çünkü Node JS, GraphQL'ın geliştirme sürecini hızlandıran ve kolaylaştıran birçok kullanışlı kütüphaneyi desteklemektedir.
+
+## Gereksinimler
+
+Bu projeyi oluşturmak için aşağıdaki gereksinimlere ihtiyacınız olacak:
+
+- Node JS'in yüklü olduğundan emin olun.
+- Bir metin düzenleyici (örn. VS Code gibi) kullanmanızı tavsiye ederiz.
+
+## Proje Yapısının Oluşturulması
+
+Öncelikle, terminale aşağıdaki komutu girerek yeni bir Node JS projesi oluşturun:
+
+```
+mkdir graphql-api
+cd graphql-api
+npm init -y
+```
+
+Bu komutlarla "graphql-api" adında bir klasör oluşturup içine geçiş yapacak ve boş bir npm projesi oluşturacaksınız.
+
+## GraphQL Kurulumu ve Ayarlanması
+
+GraphQL'i kullanabilmek için `express-graphql` kütüphanesini yüklememiz gerekiyor. Terminale aşağıdaki komutu girerek, `express-graphql` kütüphanesini yükleyin:
+
+```
+npm install express-graphql
+```
+
+Bu kütüphaneyi yükledikten sonra, `index.js` adında bir dosya oluşturun ve aşağıdaki kodu içine yapıştırın:
+
+```javascript
+const express = require('express');
+const { graphqlHTTP } = require('express-graphql');
+
+const app = express();
+
+app.use('/graphql', graphqlHTTP({
+    graphiql: true,
+}));
+
+app.listen(3000, () => {
+    console.log('GraphQL API çalışıyor...');
+});
+```
+
+Bu kod, GraphQL tarayıcı arayüzünü kullanabilmek için `/graphql` endpoint'ini ve bu endpoint'i kullanarak GraphQL sorgularını işleyecek bir HTTP sunucusunu oluşturur.
+
+## Şema Oluşturma
+
+Şimdi GraphQL şemasını oluşturmak için aşağıdaki adımları izleyelim:
+
+1. Proje klasörüne `schema` adında bir klasör oluşturun.
+2. İçine `schema.js` adında bir dosya oluşturun ve aşağıdaki kodu yapıştırın:
+
+```javascript
+const { buildSchema } = require('graphql');
+
+const schema = buildSchema(`
+    type Query {
+        hello: String
+    }
+`);
+
+module.exports = schema;
+```
+
+Bu kod, `hello` adında bir sorgu tipi içeren basit bir GraphQL şeması oluşturur.
+
+## Sorguları ve Mutasyonları Oluşturma
+
+Şimdi, sorgular ve mutasyonlar için gerekli kodları `resolvers` klasörü altında oluşturacağız:
+
+1. Proje klasörüne `resolvers` adında bir klasör oluşturun.
+2. İçine `hello.js` adında bir dosya oluşturun ve aşağıdaki kodu yapıştırın:
+
+```javascript
+const hello = () => {
+    return 'Merhaba Dünya!';
+};
+
+module.exports = hello;
+```
+
+Bu kod, `hello` sorgusu için bir çözümleyici fonksiyonunu içerir. Bu çözümleyici, sorguyu işleyecek ve istemciye "Merhaba Dünya!" yanıtını döndürecektir.
+
+## Sunucunun Başlatılması
+
+Son adımda, `index.js` dosyamızı güncelleyerek sunucuyu başlatacağız:
+
+```javascript
+const express = require('express');
+const { graphqlHTTP } = require('express-graphql');
+const schema = require('./schema/schema');
+const helloResolver = require('./resolvers/hello');
+
+const app = express();
+
+const root = {
+    hello: helloResolver,
+};
+
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+}));
+
+app.listen(3000, () => {
+    console.log('GraphQL API çalışıyor...');
+});
+```
+
+Bu güncellenmiş kod, GraphQL şemasını ve çözümleyicileri ayarlar. `root` nesnesi, sorguların ve mutasyonların nasıl işleneceğini belirtir. 
+
+## Sonuç
+
+Bu makalede Node JS kullanarak GraphQL API web servisini nasıl oluşturacağınızı öğrendiniz. Bu süreçte, GraphQL'in temel kavramlarını ve kullanımını anlamış oldunuz. Artık bu temel bilgiyi kullanarak, farklı veri kaynaklarına ve daha karmaşık şemalara sahip GraphQL servisleri oluşturmaya başlayabilirsiniz.
+
+Bu makalede, Node JS ile GraphQL API web servisinin nasıl yazılacağını adım adım açıkladık. Umarım bu makale size faydalı olmuştur ve GraphQL'i daha iyi anlamanıza yardımcı olmuştur. İyi kodlamalar!

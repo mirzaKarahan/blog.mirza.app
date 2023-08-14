@@ -1,0 +1,5 @@
+openai
+rss_parser
+python-slugify
+bs4
+python-dotenv

@@ -1,0 +1,78 @@
+---
+title: Node.js ile Web Sitesi Nasıl Yazılır?
+description: Bu makalede, Node.js kullanarak nasıl bir web sitesi yazılacağına dair detaylı bir rehber sunulmaktadır.
+---
+
+# Giriş
+
+Node.js, hızlı ve ölçeklenebilir ağ uygulamaları oluşturmak için gelişmiş bir platformdur. Bu makalede, Node.js'in güçlü özelliklerinden yararlanarak nasıl bir web sitesi yazabileceğinizi öğreneceksiniz. 
+
+## Adım 1: Gereksinimleri Yükleme
+
+İlk olarak, Node.js'i bilgisayarınıza yüklemeniz gerekiyor. Node.js'in en son sürümünü [nodejs.org](https://nodejs.org) adresinden indirebilir ve kurabilirsiniz. 
+
+## Adım 2: Proje Klasörünü Oluşturma
+
+Web sitesi projesini yapmak için bir klasör oluşturun ve klasöre girin.
+
+```bash
+mkdir web-sitesi
+cd web-sitesi
+```
+
+## Adım 3: Paket Yöneticisi İle Proje Başlatma
+
+Node.js'in entegre paket yöneticisi olan NPM (Node Package Manager), projelerinizi kolayca yönetmenizi sağlar. Projemize başlamak için terminalde aşağıdaki komutu kullanarak `package.json` dosyasını oluşturalım.
+
+```bash
+npm init -y
+```
+
+Bu komut, varsayılan bir `package.json` dosyası oluşturacak ve sizden gerekli bilgileri almayacaktır.
+
+## Adım 4: Express Framework'ünü Yükleme ve Konfigürasyon
+
+Express, Node.js tabanlı web uygulamalarını hızlı ve basit bir şekilde oluşturabilmek için kullanılan popüler bir web framework'üdür. İlk olarak, Express'i kurmak için aşağıdaki komutu kullanın:
+
+```bash
+npm install express
+```
+
+Express'in projenizin ana dosyasında kullanılabilmesi için `app.js` adında bir dosya oluşturun.
+
+```bash
+touch app.js
+```
+
+`app.js` dosyasını açın ve aşağıdaki kodu ekleyin:
+
+```javascript
+const express = require('express');
+const app = express();
+
+// Ana sayfa route'ı
+app.get('/', (req, res) => {
+  res.send('Merhaba Dünya!');
+});
+
+// Sunucuyu dinlemeye başla
+app.listen(3000, () => {
+  console.log('Web sitesi dinleniyor...');
+});
+```
+
+Bu kodda, `express` modülü import edilir ve bir Express uygulaması oluşturulur. Ardından, ana sayfa `'/'` için bir route tanımlanır ve bu route'a yapılan GET isteğine `Merhaba Dünya!` yanıtı döndürülür. Son olarak, web sitesini `3000` portunda dinlemeye başlatırız.
+
+## Adım 5: Web Sitesini Başlatma
+
+Projenin ana dizininde terminali açın ve aşağıdaki komutu çalıştırın:
+
+```bash
+node app.js
+```
+
+Bu komut, web sitesini başlatmak için `app.js` dosyasını kullanacaktır. Artık tarayıcınızda [localhost:3000](http://localhost:3000) adresini açarak web sitesini görebilirsiniz.
+
+## Sonuç
+
+Bu makalede, Node.js kullanarak nasıl bir web sitesi yazılacağına dair ayrıntılı bir rehber sunduk. Adım adım ilerlediğinizde, Node.js'in kolayca öğrenilebilen ve son derece işlevsel bir platform olduğunu göreceksiniz. Web sitesinizi geliştirmek için Express ve diğer Node.js modülleri kullanarak daha karmaşık özellikler ekleyebilirsiniz. Başarılar dileriz!

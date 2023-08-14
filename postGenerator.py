@@ -33,20 +33,15 @@ def changedFilesGitPushCommandRun(message):
 #postContent = generatedPostContentFromChatGTP(".Net Core ile bir REST API web servisinin nin nasıl yazılacağını anlatan bir blog yazmanı istiyorum.");
 
 yazilim_sorunlari = [
-    "Java'nın Android ve iş uygulamaları geliştirmede yaygın kullanımı.",
-    "C dilinin 1970'lerin başında tasarlanmış olması ve eski olması.",
-    "Python'un kodunun kolay okunabilir olması ve başlangıç için önerilmesi.",
-    "Web'in üçte birinde PHP kullanılmasına rağmen birçok programcının PHP'den hoşlanmaması.",
-    "Visual Basic'in eski moda olmasına rağmen hala hayranlarının olması.",
-    "JavaScript'in modern web için yaygın kullanılmasına rağmen yavaş olması ve güvenlik açıklarının bulunması.",
-    "R dilinin veri analizi ve istatistikçiler için popüler olması.",
-    "Go dilinin Google tarafından büyük veri için tasarlanmış olması ve hızla popülerleşmesi.",
-    "Ruby'nin kolay kodlama yapısı ve Rails add-on'u ile popüler olması.",
-    "Groovy'nin Java türevi olması ve kodlama işini hızlandırması."
+    "Node JS nedir ne işe yarar ve nasıl kullanılır ?",
+    "Node JS ile bir REST API web servisi nasıl yazılır.",
+    "Node JS ile bir GraphQL API web servisi nasıl yazılır ?",
+    "Node JS ile bir web sitesinin nasıl yazılır ?",
+    "PHP ile bir REST API web servisinin nin nasıl yazılır ?"
 ]
 
 for item in yazilim_sorunlari:
-    postContent = generatedPostContentFromChatGTP("yazılım dünyasında "+item+" konusu hakkında blog yazmanı istiyorum.");
+    postContent = generatedPostContentFromChatGTP(item+" konusu hakkında blog yazmanı istiyorum.");
     title = re.search(r"title:\s*(.*)", postContent)
     if title:
         title = title.group(1)
