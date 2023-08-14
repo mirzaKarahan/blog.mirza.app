@@ -38,14 +38,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
   }
   return (
     <html lang="en">
-      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-QN56HDYTF1"/>
-<Script id="google-analytics">
-{`window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QN56HDYTF1');`}
-</Script>
       <body
         className={`antialiased min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 ${inter.className}`}
       >
