@@ -1,0 +1,65 @@
+---
+title: "Python için Textual Framework: Başlangıç Rehberi"
+description: "Textual, Python için modern bir TUI (Terminal Kullanıcı Arayüzü) frameworküdür. Bu makalede Textual'ın ne olduğunu, ne amaçla kullanıldığını ve nasıl kullanılacağını öğreneceksiniz."
+---
+
+## Textual Framework Nedir?
+
+Textual, Python için modern bir TUI (Terminal Kullanıcı Arayüzü) frameworküdür. Web geliştirmesinden ilham alarak oluşturulmuştur. Textual, Linux, macOS, Windows ve Python'un çalıştığı diğer işletim sistemlerinde çalışır.
+
+## Textual'ın Gereksinimleri
+
+- Python 3.7 veya daha yeni bir sürüm.
+- İşletim Sistemi: Linux (tüm dağıtımlar), macOS, Windows
+
+Özellikle macOS'ta varsayılan terminal uygulaması 256 renkle sınırlıdır. Bu nedenle iterm2, Kitty veya WezTerm gibi daha yeni bir terminal kurmanız önerilir. Windows için yeni Windows Terminal, Textual uygulamalarını mükemmel bir şekilde çalıştırır.
+
+## Textual'ı Nasıl Kurarım?
+
+Textual'ı PyPI üzerinden aşağıdaki komutla kurabilirsiniz:
+
+\```python
+pip install textual
+\```
+
+Eğer Textual uygulamaları geliştirmeyi planlıyorsanız, Textual geliştirici araçlarını da kurmalısınız:
+
+\```python
+pip install textual-dev
+\```
+
+Ayrıca, Textual conda-forge üzerinden de mevcuttur. Conda-forge için tercih edilen paket yöneticisi şu anda micromamba'dır:
+
+\```bash
+micromamba install -c conda-forge textual
+micromamba install -c conda-forge textual-dev
+\```
+
+## Textual ile İlk Adımlar
+
+Textual'ı başarıyla kurduktan sonra, aşağıdaki komutu çalıştırarak Textual'ın neler yapabileceğini görebilirsiniz:
+
+\```bash
+textual demo
+\```
+
+Bu komut, Textual'ın temel özelliklerini ve bileşenlerini gösteren bir demo başlatır.
+
+## Örnekler
+
+Textual deposu, birçok örnek uygulama ile birlikte gelir. Örnekleri denemek için öncelikle Textual deposunu klonlayın:
+
+\```bash
+git clone https://github.com/Textualize/textual.git
+\```
+
+Depoyu klonladıktan sonra, `/examples/` dizinine gidin. Burada komut satırından çalıştırabileceğiniz birçok Python dosyası bulacaksınız:
+
+\```bash
+cd textual/examples/
+python code_browser.py ../
+\```
+
+## Sonuç
+
+Textual, terminal tabanlı uygulamalar oluşturmak için güçlü ve esnek bir araçtır. Modern web geliştirme tekniklerinden ilham alarak oluşturulmuş bu framework, Python geliştiricilerine terminalde zengin kullanıcı deneyimleri sunma olanağı sağlar. Başlamak için yukarıdaki adımları takip edebilirsiniz.
