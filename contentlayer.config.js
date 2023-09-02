@@ -45,7 +45,7 @@ export const Post = defineDocumentType(() => ({
     },
     keywords: {
       type: "string"
-    }
+    },
   },
   computedFields,
 }))
