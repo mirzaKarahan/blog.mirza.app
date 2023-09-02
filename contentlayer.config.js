@@ -24,6 +24,9 @@ export const Page = defineDocumentType(() => ({
     description: {
       type: "string",
     },
+    keywords: {
+      type: "string"
+    },
   },
   computedFields,
 }))
