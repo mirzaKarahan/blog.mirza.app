@@ -24,6 +24,9 @@ export const Page = defineDocumentType(() => ({
     description: {
       type: "string",
     },
+    date:{
+      type: "string",
+    },
     keywords: {
       type: "string"
     },
@@ -44,7 +47,7 @@ export const Post = defineDocumentType(() => ({
       type: "string",
     },
     date: {
-      type: "date"
+      type: "string",
     },
     keywords: {
       type: "string"

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>https://blog.mirza.app/</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/about</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/android-mobil-uygulama-gelistirmek-icin-gerekli-bilgiler</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/belirsiz-proje-gereksinimleri</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/c-dilinin-1970-lerin-basinda-tasarlanmis-olmasi-ve-eski-olmasi</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/eski-moda-olmasina-ragmen-visual-basic-e-neden-hala-hayranlar-var</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/go-dilinin-google-tarafindan-buyuk-veri-icin-tasarlanmasi-ve-hizla-populerlesmesi</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/groovy-nin-java-turevi-olmasi-ve-kodlama-isini-hizlandirmasi</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/java-nin-android-ve-is-uygulamalari-gelistirmede-yaygin-kullanimi</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/javascript-in-modern-web-icin-yaygin-olmasina-ragmen-yavas-olmasi-ve-guvenlik-aciklarinin-bulunmasi</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/net-core-ile-rest-api-web-servisi-nasil-yazilir</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/php-nin-neden-hoslanilmayan-yonleri</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/python-un-kodunun-kolay-okunabilir-olmasi-ve-baslangic-icin-onerilmesi</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/r-dilinin-veri-analizi-ve-istatistikciler-icin-populer-olmasi</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/yazilim-hatalari-ve-cozumleri-e1b8c35a-0419-4203-b1ca-3f3e2c5a7e8c</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/yazilim-proje-suresinin-yanlis-tahmin-edilmesi</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.mirza.app/posts/yetersiz-dokumantasyonun-yazilim-gelistirme-surecine-etkisi</loc>
+  <lastmod>2023-10-06T21:42:07+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+</urlset>

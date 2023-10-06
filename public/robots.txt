@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://blog.mirza.app
+
+# Sitemaps
+Sitemap: https://blog.mirza.app/sitemap.xml

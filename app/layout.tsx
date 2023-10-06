@@ -35,7 +35,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div className="max-w-2xl mx-auto py-10 px-4">
             <header>
               <div className="flex items-center justify-between">
-              <Image src="/mirza-logo.png" width={150} height={500} alt="Picture of the author"/>
+              <Link href="/"><Image className="grayscale hover:grayscale-0" src="/mirza-logo.png" width={150} height={500} alt="Picture of the author"/></Link>
                 <nav className="ml-auto text-sm font-medium space-x-6">
                   <Link href="/">Blog</Link>
                   <Link href="/about">Hakkında</Link>

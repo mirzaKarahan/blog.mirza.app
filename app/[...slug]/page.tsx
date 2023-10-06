@@ -1,8 +1,9 @@
-import { notFound } from "next/navigation"
+import { notFound,redirect } from "next/navigation"
 import { Metadata } from "next"
 import { allPages } from "contentlayer/generated"
 
 import { Mdx } from "@/components/mdx-components"
+import { Console } from "console"
 
 interface PageProps {
   params: {
@@ -13,7 +14,6 @@ interface PageProps {
 async function getPageFromParams(params: PageProps["params"]) {
   const slug = params?.slug?.join("/")
   const page = allPages.find((page) => page.slugAsParams === slug)
-
   if (!page) {
     null
   }
@@ -46,7 +46,8 @@ export default async function PagePage({ params }: PageProps) {
   const page = await getPageFromParams(params)
 
   if (!page) {
-    notFound()
+    redirect("/");
+    //notFound()
   }
 
   return (

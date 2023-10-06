@@ -14,7 +14,7 @@ def generatedPostContentFromChatGTP(subject):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
          messages=[
-             {"role": "user", "content": "Şimdi bana "+subject+" Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum. Makalenin en başında alt alta [---\n title: {Makalenin başlığı} description: {açıklaması}.\n ---] yazmalı."}
+             {"role": "user", "content": "Şimdi bana "+subject+" Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum. Makalenin en başında alt alta [---\n title: {Makalenin başlığı}\nkeywords: {SEO için anahtar kelimeler}\ndate:{yil-ay-gun formatında tarih}\ndescription: {açıklaması}.\n ---] yazmalı."}
              ]
     )
     return response.choices[0].message['content']
@@ -32,13 +32,7 @@ def changedFilesGitPushCommandRun(message):
 
 #postContent = generatedPostContentFromChatGTP(".Net Core ile bir REST API web servisinin nin nasıl yazılacağını anlatan bir blog yazmanı istiyorum.");
 
-yazilim_sorunlari = [
-    "Node JS nedir ne işe yarar ve nasıl kullanılır ?",
-    "Node JS ile bir REST API web servisi nasıl yazılır.",
-    "Node JS ile bir GraphQL API web servisi nasıl yazılır ?",
-    "Node JS ile bir web sitesinin nasıl yazılır ?",
-    "PHP ile bir REST API web servisinin nin nasıl yazılır ?"
-]
+yazilim_sorunlari = ["Bir yazılımcının ilk iş günü"]
 
 for item in yazilim_sorunlari:
     postContent = generatedPostContentFromChatGTP(item+" konusu hakkında blog yazmanı istiyorum.");
@@ -52,4 +46,4 @@ for item in yazilim_sorunlari:
         print("Başlık bulunamadı.")
     
     time.sleep(5)
-changedFilesGitPushCommandRun('post eklendi')
+#changedFilesGitPushCommandRun('post eklendi')
