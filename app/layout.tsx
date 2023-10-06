@@ -1,10 +1,12 @@
 import Link from "next/link"
+import Script from "next/script";
 import "./globals.css"
 import { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@/components/analytics"
 import Image from 'next/image'
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -23,6 +25,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="en">
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6480877761651988" crossOrigin="anonymous"/>
       <body
         className={`antialiased min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 ${inter.className}`}
       >
