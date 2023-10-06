@@ -1,11 +1,9 @@
-"use client"
 import Link from "next/link"
 import "./globals.css"
 import { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@/components/analytics"
-import { useState } from "react";
 import Image from 'next/image'
 
 const inter = Inter({ subsets: ["latin"] })
@@ -22,10 +20,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   
-  const [isOpen, setIsOpen] = useState(false)
-  function closeModal() {
-    setIsOpen(false);
-  }
+
   return (
     <html lang="en">
       <body
