@@ -32,7 +32,14 @@ def changedFilesGitPushCommandRun(message):
 
 #postContent = generatedPostContentFromChatGTP(".Net Core ile bir REST API web servisinin nin nasıl yazılacağını anlatan bir blog yazmanı istiyorum.");
 
-yazilim_sorunlari = ["Baba Vanga"]
+yazilim_sorunlari = ["Joe Biden",
+    "Xi Jinping",
+    "Vladimir Putin",
+    "Angela Merkel (Görevi bıraktı)",
+    "Emmanuel Macron",
+    "Narendra Modi",
+    "Shinzo Abe (Görevi bıraktı)",
+    "Moon Jae-in"]
 
 for item in yazilim_sorunlari:
     postContent = generatedPostContentFromChatGTP(item+" konusu hakkında blog yazmanı istiyorum.");
