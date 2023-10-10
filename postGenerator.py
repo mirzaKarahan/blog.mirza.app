@@ -14,7 +14,7 @@ def generatedPostContentFromChatGTP(subject):
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
          messages=[
-             {"role": "user", "content": "Şimdi bana "+subject+" Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum. Makalenin en başında alt alta [---\n title: {Makalenin başlığı}\nkeywords: {SEO için anahtar kelimeler}\ndate:{yil-ay-gun formatında tarih}\ndescription: {açıklaması}.\n ---] yazmalı."}
+             {"role": "user", "content": "Şimdi bana "+subject+" Bu blog makalesini yazarken bana sadece makalenin içeriğini mdx formatında ve olabildiğince detaylı bir şekilde vermeni istiyorum. Makalenin en başında alt alta [---\n title: {Makalenin başlığı}\nkeywords: {SEO için anahtar kelimeler}\ndate:{yil-ay-gun formatında bugünün tarihi}\ndescription: {açıklaması}.\n ---] yazmalı bunlar mdx formatını bozmayacak şekilde yazılmalı."}
              ]
     )
     return response.choices[0].message['content']
@@ -32,7 +32,7 @@ def changedFilesGitPushCommandRun(message):
 
 #postContent = generatedPostContentFromChatGTP(".Net Core ile bir REST API web servisinin nin nasıl yazılacağını anlatan bir blog yazmanı istiyorum.");
 
-yazilim_sorunlari = [".Net Core ile bir REST API web servisinin nin nasıl yazılır","İsrail ile Filistin arasındaki gerilim"]
+yazilim_sorunlari = ["Baba Vanga"]
 
 for item in yazilim_sorunlari:
     postContent = generatedPostContentFromChatGTP(item+" konusu hakkında blog yazmanı istiyorum.");
