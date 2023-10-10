@@ -1,0 +1,174 @@
+---
+title: .NET Core ile REST API Web Servisi Nasıl Yapılır
+keywords: .NET Core, REST API, web servis, C#
+date: 2022-09-20
+description: Bu blog makalesinde, .NET Core kullanarak nasıl bir REST API web servisi oluşturabileceğimizi öğreneceğiz.
+---
+
+# .NET Core ile REST API Web Servisi Nasıl Yapılır
+
+Bu blog makalesinde, .NET Core kullanarak nasıl bir REST API web servisi oluşturabileceğimizi öğreneceğiz. REST API, bir yazılımın diğer yazılımlarla etkileşimde bulunması için kullanılan bir standartdır ve son derece popülerdir. Bu makalede, temel adımları ve önemli kavramları detaylı bir şekilde ele alacağız.
+
+## İçindekiler
+
+1. [Gereksinimler](#gereksinimler)
+2. [Proje Oluşturma](#proje-oluşturma)
+3. [Bağımlılıkların Yüklenmesi](#bağımlılıkların-yüklenmesi)
+4. [REST API İçin Temel Sınıfların Oluşturulması](#rest-api-için-temel-sınıfların-oluşturulması)
+5. [Veritabanı Bağlantısı](#veritabanı-bağlantısı)
+6. [HTTP Metotlarının Yönlendirilmesi](#http-metotlarının-yönlendirilmesi)
+7. [Middleware'lerin Oluşturulması](#middlewarelerin-oluşturulması)
+8. [Swagger Entegrasyonu](#swagger-entegrasyonu)
+9. [Proje Denemesi](#proje-denemesi)
+10. [Sonuç](#sonuç)
+
+## Gereksinimler {#gereksinimler}
+
+Bu projeyi tamamlamak için aşağıdaki gereksinimlere ihtiyacınız olacak:
+
+- .NET Core SDK
+- Bir metin düzenleyici (örneğin Visual Studio Code)
+
+## Proje Oluşturma {#proje-oluşturma}
+
+Öncelikle, bir REST API projesi oluşturmak için bir klasöre ihtiyacımız var. Ardından, terminale şu komutu yazarak boş bir .NET Core projesi oluşturabiliriz:
+
+```bash
+dotnet new webapi -n MyRestApi
+```
+
+Bu komut, "MyRestApi" adında bir web API projesi oluşturacaktır.
+
+Proje oluşturulduktan sonra, klasöre gidin:
+
+```bash
+cd MyRestApi
+```
+
+## Bağımlılıkların Yüklenmesi {#bağımlılıkların-yüklenmesi}
+
+.NET Core üzerinde REST API projeleri oluşturmak için birçok faydalı paket bulunmaktadır. Bu paketlerin indirilmesi için NuGet paket yöneticisini kullanabiliriz. Projemizin kök dizininde aşağıdaki komutu çalıştırarak `Microsoft.AspNetCore` ve `Swashbuckle.AspNetCore` paketlerini indirelim:
+
+```bash
+dotnet add package Microsoft.AspNetCore
+dotnet add package Swashbuckle.AspNetCore
+```
+
+Bu komutlar paketleri projemize ekleyecektir.
+
+## REST API İçin Temel Sınıfların Oluşturulması {#rest-api-için-temel-sınıfların-oluşturulması}
+
+Bir REST API'nin ana bileşenleri, Controller ve Model sınıflarıdır. Controller sınıfları, API isteklerine yanıt vermekten sorumludur. Model sınıfları, API üzerinden veri taşımak için kullanılır. Şimdi, `Controllers` ve `Models` adında iki klasör oluşturun.
+
+```bash
+mkdir Controllers Models
+```
+
+Daha sonra, `Controllers` klasörü içinde bir `ValuesController.cs` dosyası oluşturalım ve aşağıdaki kodu içine yapıştıralım:
+
+```csharp
+using Microsoft.AspNetCore.Mvc;
+
+namespace MyRestApi.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ValuesController : ControllerBase
+    {
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok("Hello from API");
+        }
+    }
+}
+```
+
+Bu kod, `/api/values` adresine gelen `GET` isteğine yanıt olarak "Hello from API" mesajını döndürecektir.
+
+## Veritabanı Bağlantısı {#veritabanı-bağlantısı}
+
+Çoğu REST API projeleri, bir veritabanıyla etkileşim halinde olurlar. Bu nedenle, veritabanı bağlantısını yapmamız gerekiyor. Bu örnekte SQLite kullanacağız. İlk adımda `appsettings.json` dosyasını düzenleyelim ve aşağıdaki kodu ekleyelim:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=mydatabase.db"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}
+```
+
+Bu kod, SQLite veritabanına bağlanmak için `mydatabase.db` dosya yolunu belirtiyor.
+
+Daha sonra, `Startup.cs` dosyasını açalım ve `ConfigureServices` metoduna aşağıdaki kodu ekleyelim:
+
+```csharp
+services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+```
+
+Bu kod, `AppDbContext` adında bir DbContext sınıfı ekleyecektir. 
+
+## HTTP Metotlarının Yönlendirilmesi {#http-metotlarının-yönlendirilmesi}
+
+HTTP metotları, API isteklerini işleyen Controller sınıflarıyla eşleştirilmelidir. Bu işlemi kolaylaştırmak için `Startup.cs` dosyasında `Configure` metoduna aşağıdaki kodu ekleyelim:
+
+```csharp
+app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+```
+
+Bu kod, HTTP metotlarını ilgili Controller sınıflarına yönlendirir.
+
+## Middleware'lerin Oluşturulması {#middlewarelerin-oluşturulması}
+
+Middleware'ler, özel işlemleri gerçekleştirmek veya API isteklerini işlemeden önce belirli kontrolleri yapmak için kullanışlıdır. `Startup.cs` dosyasında `Configure` metoduna aşağıdaki kodu ekleyerek middleware'leri ekleyelim:
+
+```csharp
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+});
+
+app.UseMiddleware<ExceptionMiddleware>();
+```
+
+Bu kod, Swagger arayüzünü ekler ve `ExceptionMiddleware` adında bir özelleştirilmiş middleware ekler.
+
+## Swagger Entegrasyonu {#swagger-entegrasyonu}
+
+Swagger, REST API'lerin belgelendirilmesi için yaygın olarak kullanılan bir araçtır. Swagger'ı projemize entegre etmek için `Startup.cs` dosyasında `ConfigureServices` metoduna aşağıdaki kodu ekleyelim:
+
+```csharp
+services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+});
+```
+
+Bu kod, Swagger belgelendirme sisteminin yapılandırmasını yapar.
+
+## Proje Denemesi {#proje-denemesi}
+
+Artık REST API projemizi test etmeye hazırız. Terminale `dotnet run` komutunu yazarak projeyi başlatalım. Tarayıcımızda `https://localhost:5001/swagger/index.html` adresine giderek Swagger arayüzünü görebiliriz. `ValuesController` üzerindeki `GET /api/values` yolunu bulun ve "Try it out" düğmesine tıklayarak isteği deneyin.
+
+Sonuç olarak, "Hello from API" mesajını döndüren bir API isteği gerçekleştirmiş olduk.
+
+## Sonuç {#sonuç}
+
+Bu blog makalesinde, .NET Core kullanarak REST API bir web servisi nasıl oluşturabileceğimizi öğrendik. Temel adımları ve önemli kavramları detaylı bir şekilde ele aldık. Artık bu bilgileri uygulayarak kendi REST API projelerinizi oluşturabilirsiniz. Başarılar dilerim!
+
+Not: Bu makale, mdx formatında oluşturulmuştur.
